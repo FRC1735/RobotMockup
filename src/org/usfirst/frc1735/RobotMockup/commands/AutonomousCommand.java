@@ -9,9 +9,9 @@
 // it from being updated in the future.
 
 
-package org.usfirst.frc1735.RobotTutorial.commands;
+package org.usfirst.frc1735.RobotMockup.commands;
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc1735.RobotTutorial.Robot;
+import org.usfirst.frc1735.RobotMockup.Robot;
 
 /**
  *
