@@ -17,7 +17,8 @@ import org.usfirst.frc1735.RobotMockup.commands.*;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
-
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.GenericHID.HIDType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -59,7 +60,7 @@ public class MotorSub extends Subsystem {
     }
 
 	public void controlMotorWithJoysticks(Joystick joyLeft, Joystick joyRight) {
-		// Poll the left-hand joystick X axis to control this motor.
+		// Poll the right-hand joystick X axis to control this motor.
 		
 		// The following indented code is a copy from Drivetrain.java.
 		// It would be nice to make this a subroutine, but that requires building input and output arrays to hold the four values, putting the data into the arrays,
@@ -67,12 +68,12 @@ public class MotorSub extends Subsystem {
 			// Extract the joystick values
 			double joyLeftX, joyLeftY, joyRightX, joyRightY;
 			
-			// If an Xbox controller, try using the two sticks on controller 1 (Right side) instead of using two joysticks
-			if (joyRight.getIsXbox()) {
-				joyLeftX = joyRight.getRawAxis(0);  // Left stick X
-				joyLeftY = joyRight.getRawAxis(1);  // Left stick Y
-				joyRightX = joyRight.getRawAxis(4); // Right stick X
-				joyRightY = joyRight.getRawAxis(5); // Right stick Y
+			// If an Xbox controller, try using the two sticks on controller 0 (Left side) instead of using two joysticks
+			if (DriverStation.getInstance().getJoystickIsXbox(joyLeft.getPort())) {
+				joyLeftX = joyLeft.getRawAxis(0);  // Left stick X
+				joyLeftY = joyLeft.getRawAxis(1);  // Left stick Y
+				joyRightX = joyLeft.getRawAxis(4); // Right stick X
+				joyRightY = joyLeft.getRawAxis(5); // Right stick Y
 			}
 			else {
 				joyLeftX  = joyLeft.getX();

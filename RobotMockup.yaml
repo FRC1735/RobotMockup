@@ -7,8 +7,9 @@ Children:
     - Children: []
       Properties:
         Type: !!robotbuilder.data.properties.ChoicesProperty
-          choices: &id002 [Victor, Jaguar, Talon, VictorSP, TalonSRX, Spark, SD540]
-          default: Talon
+          choices: &id002 [Victor, Jaguar, Talon, VictorSP, PWMTalonSRX, Spark, SD540,
+            PWMVictorSPX, DMC60]
+          default: Spark
           name: Type
           validators: null
           value: Victor
@@ -19,6 +20,8 @@ Children:
           name: Output Channel (PWM)
           validators: &id004 [PWMOutput]
           value: '2'
+        Inverted: !!robotbuilder.data.properties.BooleanProperty {default: false,
+          name: Inverted, validators: null, value: false}
       Base: Speed Controller
       Name: Motor
     Properties:
@@ -34,6 +37,8 @@ Children:
         name: Constants
         validators: null
         value: &id001 []
+      Send to SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Send to SmartDashboard, validators: null, value: false}
     Base: Subsystem
     Name: MotorSub
   - Children:
@@ -79,6 +84,8 @@ Children:
         name: Constants
         validators: null
         value: *id001
+      Send to SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Send to SmartDashboard, validators: null, value: false}
     Base: Subsystem
     Name: LightSub
   - Children:
@@ -87,7 +94,7 @@ Children:
         Properties:
           Type: !!robotbuilder.data.properties.ChoicesProperty
             choices: *id002
-            default: Talon
+            default: Spark
             name: Type
             validators: null
             value: Victor
@@ -97,13 +104,15 @@ Children:
             name: Output Channel (PWM)
             validators: *id004
             value: '0'
+          Inverted: !!robotbuilder.data.properties.BooleanProperty {default: false,
+            name: Inverted, validators: null, value: false}
         Base: Speed Controller
         Name: Speed Controller L
       - Children: []
         Properties:
           Type: !!robotbuilder.data.properties.ChoicesProperty
             choices: *id002
-            default: Talon
+            default: Spark
             name: Type
             validators: null
             value: Victor
@@ -113,15 +122,11 @@ Children:
             name: Output Channel (PWM)
             validators: *id004
             value: '1'
+          Inverted: !!robotbuilder.data.properties.BooleanProperty {default: false,
+            name: Inverted, validators: null, value: false}
         Base: Speed Controller
         Name: Speed Controller R
       Properties:
-        Left Motor Inverted: !!robotbuilder.data.properties.BooleanProperty {default: false,
-          name: Left Motor Inverted, validators: null, value: true}
-        Right Motor Inverted: !!robotbuilder.data.properties.BooleanProperty {default: false,
-          name: Right Motor Inverted, validators: null, value: false}
-        Sensitivity: !!robotbuilder.data.properties.DoubleProperty {default: 0.5,
-          name: Sensitivity, validators: null, value: 0.5}
         Right Motor: !!robotbuilder.data.properties.ChildSelectionProperty
           default: 1
           name: Right Motor
@@ -140,8 +145,8 @@ Children:
           name: Safety Expiration Time, validators: null, value: 0.1}
         Safety Enabled: !!robotbuilder.data.properties.BooleanProperty {default: true,
           name: Safety Enabled, validators: null, value: true}
-      Base: Robot Drive 2
-      Name: Robot Drive 2 1
+      Base: Differential Drive
+      Name: Differential Drive 1
     Properties:
       Default command parameters: !!robotbuilder.data.properties.ParametersProperty
         default: []
@@ -155,6 +160,8 @@ Children:
         name: Constants
         validators: null
         value: []
+      Send to SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Send to SmartDashboard, validators: null, value: false}
     Base: Subsystem
     Name: Drivetrain
   Properties: {}
@@ -261,6 +268,10 @@ Children:
         value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
+      Run When Disabled: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Run When Disabled, validators: null, value: false}
+      Autonomous Selection: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Autonomous Selection, validators: null, value: false}
     Base: Command
     Name: Autonomous Command
   - Children: []
@@ -279,6 +290,10 @@ Children:
         value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: false}
+      Run When Disabled: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Run When Disabled, validators: null, value: false}
+      Autonomous Selection: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Autonomous Selection, validators: null, value: false}
     Base: Command
     Name: MotorByJoystick
   - Children: []
@@ -297,6 +312,10 @@ Children:
         value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: false}
+      Run When Disabled: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Run When Disabled, validators: null, value: false}
+      Autonomous Selection: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Autonomous Selection, validators: null, value: false}
     Base: Command
     Name: EnableLight
   - Children: []
@@ -315,6 +334,10 @@ Children:
         value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: false}
+      Run When Disabled: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Run When Disabled, validators: null, value: false}
+      Autonomous Selection: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Autonomous Selection, validators: null, value: false}
     Base: Command
     Name: DriveWithJoysticks
   - Children: []
@@ -333,6 +356,10 @@ Children:
         value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: false}
+      Run When Disabled: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Run When Disabled, validators: null, value: false}
+      Autonomous Selection: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Autonomous Selection, validators: null, value: false}
     Base: Command
     Name: EnterTankMode
   - Children: []
@@ -351,6 +378,10 @@ Children:
         value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: false}
+      Run When Disabled: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Run When Disabled, validators: null, value: false}
+      Autonomous Selection: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Autonomous Selection, validators: null, value: false}
     Base: Command
     Name: EnterArcadeMode
   Properties: {}
